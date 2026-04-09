@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pura Malta Rugby</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:       #1A7BC4;
+  --blue-light: #3DA5F0;
+  --blue-dark:  #0E3A6E;
+  --blue-mid:   #1553A0;
+  --black:      #060608;
+  --dark:       #0C0D12;
+  --dark2:      #111318;
+  --dark3:      #181B22;
+  --mid:        #1E2230;
+  --mid2:       #252A3A;
+  --text:       #E8EDF8;
+  --text-dim:   #8A93B0;
+  --text-muted: #4A5068;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; opacity: .5;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 48px;
+  background: linear-gradient(to bottom, rgba(6,6,8,.97) 60%, transparent);
+  border-bottom: 1px solid rgba(26,123,196,.1);
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none;
+}
+
+.nav-brand img {
+  height: 36px; width: auto;
+  filter: drop-shadow(0 0 6px rgba(61,165,240,.3));
+}
+
+.nav-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 5px;
+  color: var(--blue-light);
+}
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--blue-light); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 120px 48px 80px;
+  position: relative; overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 50%, rgba(26,123,196,.12) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 50% at 15% 80%, rgba(14,58,110,.15) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 40% at 85% 15%, rgba(61,165,240,.06) 0%, transparent 55%);
+}
+
+/* Cruz de Malta decorativa */
+.hero-bg-cross {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(65vw, 560px); height: min(65vw, 560px);
+  opacity: .022; pointer-events: none;
+}
+
+.hero-logo-wrap {
+  position: relative; margin-bottom: 36px;
+}
+
+.ring {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(26,123,196,.18);
+  animation: pulseRing 4s ease-in-out infinite;
+}
+.ring:nth-child(1) { width: 320px; height: 320px; }
+.ring:nth-child(2) { width: 380px; height: 380px; border-color: rgba(26,123,196,.09); animation-delay: .9s; }
+
+@keyframes pulseRing {
+  0%,100% { opacity:.5; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity:1; transform: translate(-50%,-50%) scale(1.04); }
+}
+
+.hero-shield {
+  position: relative; z-index: 1;
+  width: min(240px, 50vw); height: auto;
+  filter: drop-shadow(0 0 36px rgba(26,123,196,.55)) drop-shadow(0 0 70px rgba(26,123,196,.2));
+  animation: float 7s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 16px;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue-light);
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--blue); }
+
+.hero h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(68px, 14vw, 192px);
+  line-height: .87; letter-spacing: -1px;
+  color: var(--text);
+}
+.hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--blue-light);
+  color: transparent;
+}
+
+.hero-motto {
+  margin-top: 22px;
+  font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--text-muted); font-style: italic;
+}
+
+.hero-band {
+  margin-top: 44px;
+  display: inline-flex;
+  border: 1px solid rgba(26,123,196,.25);
+  overflow: hidden;
+}
+
+.hband-item {
+  padding: 14px 36px;
+  border-right: 1px solid rgba(26,123,196,.25);
+  text-align: center;
+}
+.hband-item:last-child { border-right: none; }
+
+.hband-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px; color: var(--blue-light); line-height: 1;
+}
+.hband-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 4px;
+}
+
+.scroll-hint {
+  margin-top: 64px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-muted); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+}
+.scroll-bar {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--blue), transparent);
+  animation: sdrop 2s ease-in-out infinite;
+}
+@keyframes sdrop {
+  0%,100% { transform:scaleY(0); transform-origin:top; opacity:0; }
+  50% { transform:scaleY(1); transform-origin:top; opacity:1; }
+}
+
+/* SEPARATOR */
+.sep {
+  display: flex; align-items: center; gap: 20px; padding: 0 48px;
+}
+.sep-line { flex:1; height:1px; background: var(--mid2); }
+.sep-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: 5px; color: var(--blue); opacity: .5;
+}
+
+/* MANIFIESTO */
+.manifiesto {
+  padding: 100px 48px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 80px; align-items: start;
+}
+
+.manif-eyebrow {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 14px;
+}
+.manif-eyebrow::after { content:''; flex:1; height:1px; background:var(--mid2); max-width:100px; }
+
+.manif-quote {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(26px, 3.2vw, 46px);
+  line-height: 1.1; color: var(--text); position: relative;
+}
+.manif-quote::before {
+  content: '"'; font-family: 'Anton', sans-serif; font-size: 130px;
+  color: rgba(26,123,196,.07);
+  position: absolute; top: -28px; left: -10px; line-height: 1; pointer-events: none;
+}
+.manif-quote em { color: var(--blue-light); font-style: normal; }
+
+.manif-body {
+  margin-top: 24px; font-size: 15px;
+  color: var(--text-dim); line-height: 1.8; font-weight: 300;
+}
+
+.valores-eyebrow {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 18px;
+}
+
+.valores-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.vchip {
+  padding: 7px 15px;
+  border: 1px solid rgba(26,123,196,.2);
+  background: var(--dark2);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 2px;
+  color: var(--text-dim);
+  transition: all .2s ease; cursor: default;
+}
+.vchip:hover {
+  background: rgba(26,123,196,.1);
+  border-color: var(--blue-light);
+  color: var(--blue-light);
+  transform: translateY(-2px);
+}
+
+/* PLANTEL */
+.plantel {
+  padding: 80px 48px 120px;
+  background: var(--dark2);
+}
+
+.plantel-head {
+  margin-bottom: 10px;
+}
+
+.plantel-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(48px, 9vw, 104px);
+  line-height: .88; color: var(--text);
+}
+.plantel-title em { color: var(--blue-light); font-style: normal; }
+
+.plantel-desc {
+  font-size: 13px; color: var(--text-muted);
+  font-style: italic; font-weight: 300; line-height: 1.6;
+  margin-bottom: 48px; margin-top: 6px;
+}
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+  gap: 2px;
+}
+
+/* CARD */
+.jcard {
+  background: var(--dark3);
+  border: 1px solid var(--mid2);
+  padding: 26px 20px 22px;
+  position: relative; overflow: hidden;
+  transition: background .2s, transform .18s;
+  cursor: default;
+}
+
+.jcard::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--blue-dark), var(--blue-light));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+}
+.jcard:hover::after { transform: scaleX(1); }
+.jcard:hover { background: rgba(26,123,196,.055); transform: translateY(-3px); }
+
+.jcard-num {
+  position: absolute; top: 14px; right: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; letter-spacing: 2px; color: var(--text-muted);
+}
+
+.jcard-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--mid2);
+  border: 2px solid rgba(26,123,196,.28);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Anton', sans-serif; font-size: 17px;
+  color: var(--blue-light); flex-shrink: 0;
+}
+
+.jcard-cap .avatar {
+  border-color: var(--blue-light);
+  background: rgba(26,123,196,.14);
+  box-shadow: 0 0 14px rgba(26,123,196,.28);
+}
+
+.jcard-name {
+  font-weight: 500; font-size: 14px;
+  color: var(--text); line-height: 1.3; margin-bottom: 2px;
+}
+
+.jcard-age-row {
+  display: flex; align-items: baseline; gap: 4px;
+}
+
+.age-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px; color: var(--blue-light); line-height: 1;
+}
+
+.age-label {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.jcard-cargo {
+  display: inline-block; margin-top: 6px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--blue-light);
+  border: 1px solid rgba(61,165,240,.3);
+  padding: 3px 10px;
+  background: rgba(26,123,196,.08);
+}
+
+/* stats fun */
+.jstats {
+  border-top: 1px solid var(--mid2);
+  padding-top: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.jstat {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px;
+}
+
+.jstat-lbl {
+  font-size: 11px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 5px;
+  line-height: 1.3;
+}
+
+.jstat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 1px;
+  color: var(--text-dim); text-align: right; flex-shrink: 0;
+}
+
+.jstat-val.bebida {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0;
+  color: var(--blue-light);
+}
+
+/* INFO BLOCKS */
+.info-section {
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.iblock {
+  background: var(--dark3);
+  border: 1px solid var(--mid2);
+  padding: 48px 36px;
+}
+
+.iblock-eye {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 14px;
+}
+
+.iblock-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: var(--text);
+  letter-spacing: 1px; line-height: 1.2;
+}
+
+.iblock-body {
+  margin-top: 14px; font-size: 13px;
+  color: var(--text-dim); line-height: 1.75; font-weight: 300;
+}
+
+.hl { color: var(--blue-light); }
+
+/* FOOTER */
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--mid2);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+  background: var(--black);
+}
+
+.foot-brand {
+  display: flex; align-items: center; gap: 14px;
+}
+.foot-brand img {
+  height: 46px;
+  filter: drop-shadow(0 0 8px rgba(26,123,196,.4));
+}
+.foot-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 6px; color: var(--blue-light);
+}
+
+.foot-right {
+  font-size: 12px; color: var(--text-muted);
+  line-height: 1.8; text-align: right;
+}
+.foot-ig { color: var(--blue-light); text-decoration: none; }
+.foot-ig:hover { text-decoration: underline; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .ring:nth-child(1) { width: 260px; height: 260px; }
+  .ring:nth-child(2) { width: 310px; height: 310px; }
+  .hero-band { flex-direction: column; }
+  .hband-item { border-right: none; border-bottom: 1px solid rgba(26,123,196,.25); }
+  .hband-item:last-child { border-bottom: none; }
+  .sep { padding: 0 20px; }
+  .manifiesto { grid-template-columns: 1fr; gap: 48px; padding: 80px 20px; }
+  .plantel { padding: 60px 20px 80px; }
+  .info-section { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; }
+  .foot-right { text-align: left; }
+}
+
+/* FADE IN */
+.fi { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+.fi.vis { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Pura Malta" onerror="this.style.display='none'">
+    <span class="nav-brand-name">PURA MALTA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#plantel">Plantel</a></li>
+    <li><a href="#club">Club</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <svg class="hero-bg-cross" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#1A7BC4" d="M77,0 L123,0 L123,54 L146,31 L169,54 L146,77 L200,77 L200,123 L146,123 L169,146 L146,169 L123,146 L123,200 L77,200 L77,146 L54,169 L31,146 L54,123 L0,123 L0,77 L54,77 L31,54 L54,31 L77,54 Z"/>
+  </svg>
+
+  <div class="hero-logo-wrap fi">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <img class="hero-shield" id="heroShield" src="./logo-pura-malta.png" alt="Escudo Pura Malta"
+         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22240%22><text y=%22120%22 x=%2250%22 font-size=%2240%22 fill=%22%231A7BC4%22>PM</text></svg>'">
+  </div>
+
+  <div class="hero-eyebrow fi" style="transition-delay:.15s">
+    <div class="eyebrow-line"></div>
+    <span>Mar del Plata · Desde 1996</span>
+    <div class="eyebrow-line"></div>
+  </div>
+
+  <h1 class="fi" style="transition-delay:.25s">
+    PURA<br><span class="outline">MALTA</span>
+  </h1>
+
+  <p class="hero-motto fi" style="transition-delay:.35s">Saturni Dies · Caeles Beatum Est</p>
+
+  <div class="hero-band fi" style="transition-delay:.45s">
+    <div class="hband-item">
+      <div class="hband-num">1996</div>
+      <div class="hband-label">Fundación</div>
+    </div>
+    <div class="hband-item">
+      <div class="hband-num" id="heroCount">22</div>
+      <div class="hband-label">Jugadores</div>
+    </div>
+    <div class="hband-item">
+      <div class="hband-num">MDP</div>
+      <div class="hband-label">Mar del Plata</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint fi" style="transition-delay:.55s">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-text">✦ CRC 1949 ✦</div><div class="sep-line"></div></div>
+
+<!-- MANIFIESTO -->
+<section id="nosotros" class="manifiesto">
+  <div class="fi">
+    <div class="manif-eyebrow">Quiénes somos</div>
+    <p class="manif-quote">
+      Hay quienes jugaron toda la vida, hay quienes jugaron de grande&nbsp;—
+      <em>todos nos sentimos rugbiers.</em>
+    </p>
+    <p class="manif-body">
+      Nacimos en el Comercial Rugby Club en abril de 1996, antes conocidos como "La Camándula".
+      Un grupo de ex jugadores que eligió no dejar la cancha. El rugby no es un deporte, es una forma de vida.
+    </p>
+  </div>
+
+  <div class="fi" style="transition-delay:.12s">
+    <div class="valores-eyebrow">Nuestros valores</div>
+    <div class="valores-wrap">
+      <div class="vchip">Solidaridad</div>
+      <div class="vchip">Valor</div>
+      <div class="vchip">Fe</div>
+      <div class="vchip">Sacrificio</div>
+      <div class="vchip">Honor</div>
+      <div class="vchip">Lealtad</div>
+      <div class="vchip">Compañerismo</div>
+      <div class="vchip">Entrega</div>
+      <div class="vchip">Compromiso</div>
+      <div class="vchip">Pasión</div>
+      <div class="vchip">Humildad</div>
+      <div class="vchip">Esfuerzo</div>
+      <div class="vchip">Respeto</div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-text">✦</div><div class="sep-line"></div></div>
+
+<!-- PLANTEL -->
+<section id="plantel" class="plantel">
+  <div class="plantel-head fi">
+    <div class="plantel-title">EL <em>PLANTEL</em></div>
+  </div>
+  <p class="plantel-desc fi" style="transition-delay:.08s">
+    Las estadísticas que realmente importan en el rugby veterano 🏉
+  </p>
+  <div class="pgrid" id="pgrid"></div>
+</section>
+
+<div class="sep" style="background:var(--dark2)"><div class="sep-line"></div><div class="sep-text">✦ CRC 1949 ✦</div><div class="sep-line"></div></div>
+
+<!-- INFO -->
+<section id="club" class="info-section">
+  <div class="iblock fi">
+    <div class="iblock-eye">Fundado</div>
+    <div class="iblock-val">Abril 1996</div>
+    <p class="iblock-body">Nació en el seno del Comercial Rugby Club como "La Camándula". Un grupo de ex jugadores dedicado a difundir las virtudes del rugbier y la nobleza del deporte.</p>
+  </div>
+  <div class="iblock fi" style="transition-delay:.1s">
+    <div class="iblock-eye">Sede</div>
+    <div class="iblock-val">Sierra de los Padres · MDP</div>
+    <p class="iblock-body">Comercial Rugby Club, Buenos Aires. Un rincón entre sierras donde cada sábado se junta este equipo que convirtió la amistad en ritual.</p>
+  </div>
+  <div class="iblock fi" style="transition-delay:.2s">
+    <div class="iblock-eye">Redes & Contacto</div>
+    <div class="iblock-val">@Puramalta_rugby</div>
+    <p class="iblock-body">Instagram y el boca en boca de siempre. Para sumarte escribí a <span class="hl">puramalta.226@gmail.com</span></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <img src="./logo-pura-malta.png" alt="Logo Pura Malta" onerror="this.style.display='none'">
+    <div class="foot-brand-name">PURA MALTA</div>
+  </div>
+  <div class="foot-right">
+    Comercial Rugby Club · Mar del Plata, Buenos Aires<br>
+    <a class="foot-ig" href="https://instagram.com/Puramalta_rugby" target="_blank">@Puramalta_rugby</a>
+    &nbsp;·&nbsp; Desde 1996
+  </div>
+</footer>
+
+<script>
+const plantel = [
+  { name:'Marcelo "Tano" Vapore',     cargo:'Capitán',  edad:58, cervezas:7,  asados:22, bebida:'Fernet puro',       chistes:3 },
+  { name:'Fernando Tami',             cargo:'Admin',    edad:68, cervezas:4,  asados:30, bebida:'Vino tinto',         chistes:8 },
+  { name:'Javier Augusto Zanetti',    cargo:'',         edad:57, cervezas:6,  asados:18, bebida:'Cerveza',            chistes:2 },
+  { name:'Esteban A. Fernandez',      cargo:'',         edad:61, cervezas:5,  asados:20, bebida:'Sidra',              chistes:5 },
+  { name:'Hugo Daniel Brachetta',     cargo:'',         edad:64, cervezas:8,  asados:25, bebida:'Gin tónico',         chistes:1 },
+  { name:'Fernando Rodolfo Coppari',  cargo:'',         edad:64, cervezas:6,  asados:19, bebida:'Malbec',             chistes:4 },
+  { name:'Carlos Schoenknecht',       cargo:'',         edad:54, cervezas:9,  asados:14, bebida:'Birra artesanal',    chistes:6 },
+  { name:'Claudio Sacerdote',         cargo:'',         edad:63, cervezas:5,  asados:21, bebida:'Whisky',             chistes:3 },
+  { name:'Ezequiel Martinez',         cargo:'',         edad:41, cervezas:10, asados:12, bebida:'Cerveza',            chistes:7 },
+  { name:'José Gastón Rojas Cuenca',  cargo:'',         edad:41, cervezas:8,  asados:16, bebida:'Gin',                chistes:4 },
+  { name:'Jose Salaberry',            cargo:'',         edad:51, cervezas:6,  asados:18, bebida:'Fernet',             chistes:2 },
+  { name:'Federico Juan Goldar',      cargo:'',         edad:51, cervezas:7,  asados:17, bebida:'Aperol spritz',      chistes:5 },
+  { name:'Willy Mac',                 cargo:'',         edad:60, cervezas:5,  asados:23, bebida:'Scotch',             chistes:9 },
+  { name:'Martin Arana',              cargo:'',         edad:51, cervezas:7,  asados:15, bebida:'Cerveza',            chistes:3 },
+  { name:'Gabriel Godoy Nanni',       cargo:'',         edad:52, cervezas:8,  asados:20, bebida:'Malbec',             chistes:6 },
+  { name:'Sebastián Ardanaz',         cargo:'',         edad:46, cervezas:9,  asados:11, bebida:'Gin tónico',         chistes:1 },
+  { name:'Fede Morteo',               cargo:'',         edad:58, cervezas:6,  asados:19, bebida:'Fernet',             chistes:4 },
+  { name:'Horacio Musicante',         cargo:'',         edad:60, cervezas:7,  asados:22, bebida:'Cerveza',            chistes:5 },
+  { name:'Humberto Simonetti',        cargo:'',         edad:63, cervezas:5,  asados:26, bebida:'Vino tinto',         chistes:7 },
+  { name:'Mauro Molteni',             cargo:'',         edad:53, cervezas:8,  asados:17, bebida:'Sidra',              chistes:2 },
+  { name:'Carlos Ezcurra',            cargo:'',         edad:63, cervezas:6,  asados:24, bebida:'Whisky',             chistes:8 },
+  { name:'Pablo Alberto Galera',      cargo:'',         edad:63, cervezas:7,  asados:21, bebida:'Malbec',             chistes:3 },
+];
+
+document.getElementById('heroCount').textContent = plantel.length;
+
+function ini(n) {
+  return n.replace(/['"«»]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+}
+
+const grid = document.getElementById('pgrid');
+
+plantel.forEach((j, i) => {
+  const c = document.createElement('div');
+  c.className = 'jcard fi' + (j.cargo==='Capitán' ? ' jcard-cap' : '');
+  c.style.transitionDelay = (i * 0.045) + 's';
+
+  c.innerHTML = `
+    <div class="jcard-num">#${String(i+1).padStart(2,'0')}</div>
+    <div class="jcard-header">
+      <div class="avatar">${ini(j.name)}</div>
+      <div>
+        <div class="jcard-name">${j.name}</div>
+        <div class="jcard-age-row">
+          <div class="age-num">${j.edad}</div>
+          <div class="age-label">años</div>
+        </div>
+        ${j.cargo ? `<div class="jcard-cargo">${j.cargo}</div>` : ''}
+      </div>
+    </div>
+    <div class="jstats">
+      <div class="jstat">
+        <span class="jstat-lbl">🍺 Cervezas por partido</span>
+        <span class="jstat-val">${j.cervezas}</span>
+      </div>
+      <div class="jstat">
+        <span class="jstat-lbl">🥩 Asados en la temporada</span>
+        <span class="jstat-val">${j.asados}</span>
+      </div>
+      <div class="jstat">
+        <span class="jstat-lbl">🥃 Bebida favorita</span>
+        <span class="jstat-val bebida">${j.bebida}</span>
+      </div>
+      <div class="jstat">
+        <span class="jstat-lbl">😐 Chistes malos / año</span>
+        <span class="jstat-val">${j.chistes}</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(c);
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
