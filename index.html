@@ -853,7 +853,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
 
 /* ---- PLANTEL ---- */
 const plantel = [
-  { name:'Marcelo "Tano" Vapore',     cargo_es:'Capitán',    cargo_en:'Captain', edad:58, cervezas:7,  asados:22, bebida_es:'Fernet puro',     bebida_en:'Pure Fernet',    chistes:3 },
+  { name:'Marcelo "Tano" Vapore',    avatar:'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1775582330/ji5xkinhqy41winbs1xb.webp',  cargo_es:'Capitán',    cargo_en:'Captain', edad:58, cervezas:7,  asados:22, bebida_es:'Fernet puro',     bebida_en:'Pure Fernet',    chistes:3 },
   { name:'Fernando Tami',             cargo_es:'Admin',      cargo_en:'Admin',   edad:68, cervezas:4,  asados:30, bebida_es:'Vino tinto',       bebida_en:'Red wine',       chistes:8 },
   { name:'Javier Augusto Zanetti',    cargo_es:'',           cargo_en:'',        edad:57, cervezas:6,  asados:18, bebida_es:'Cerveza',          bebida_en:'Beer',           chistes:2 },
   { name:'Esteban A. Fernandez',      cargo_es:'',           cargo_en:'',        edad:61, cervezas:5,  asados:20, bebida_es:'Sidra',            bebida_en:'Cider',          chistes:5 },
@@ -891,7 +891,10 @@ plantel.forEach((j, i) => {
   c.innerHTML = `
     <div class="jcard-num">#${String(i+1).padStart(2,'0')}</div>
     <div class="jcard-header">
-      <div class="avatar">${ini(j.name)}</div>
+      <div class="avatar">${j.avatar 
+  ? `<img class="avatar" src="${j.avatar}">` 
+  : `<div class="avatar">${ini(j.name)}</div>`
+}</div>
       <div>
         <div class="jcard-name">${j.name}</div>
         <div class="jcard-age-row">
