@@ -567,19 +567,31 @@ footer {
 
 /* HIDDEN LANG */
 [data-lang] { display: none; }
+
 body.lang-es [data-lang="es"],
-body.lang-en [data-lang="en"] { display: inherit; }
+body.lang-en [data-lang="en"],
+body.lang-fr [data-lang="fr"] { display: inherit; }
+
 span[data-lang], a[data-lang] { display: none; }
+
 body.lang-es span[data-lang="es"],
 body.lang-es a[data-lang="es"],
 body.lang-en span[data-lang="en"],
-body.lang-en a[data-lang="en"] { display: inline; }
+body.lang-en a[data-lang="en"],
+body.lang-fr span[data-lang="fr"],
+body.lang-fr a[data-lang="fr"] { display: inline; }
+
 div[data-lang] { display: none; }
+
 body.lang-es div[data-lang="es"],
-body.lang-en div[data-lang="en"] { display: block; }
+body.lang-en div[data-lang="en"],
+body.lang-fr div[data-lang="fr"] { display: block; }
+
 p[data-lang] { display: none; }
+
 body.lang-es p[data-lang="es"],
-body.lang-en p[data-lang="en"] { display: block; }
+body.lang-en p[data-lang="en"],
+body.lang-fr p[data-lang="fr"] { display: block; }
 </style>
 </head>
 <body class="lang-es">
@@ -588,6 +600,7 @@ body.lang-en p[data-lang="en"] { display: block; }
 <div class="lang-switch">
   <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
   <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
 </div>
 
 <nav>
@@ -797,6 +810,7 @@ function setLang(l) {
   document.body.className = 'lang-' + l;
   document.getElementById('btn-es').classList.toggle('active', l === 'es');
   document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
 }
 
 /* ---- GALLERY ---- */
