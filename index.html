@@ -1179,82 +1179,70 @@ function setLang(l) {
 
 const IMAGES = [
   {
-    id: 'obdqdyqcsls4b57wcfqw',
-    version: 'v1775918422',
-    alt: 'Pura Malta Rugby',
+    url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918422/obdqdyqcsls4b57wcfqw.jpg',
     es: 'El equipo',
     en: 'The team',
     fr: "L'équipe"
   },
   {
-     id: 'adc5uald4cj5wi8aaydz',
-    version: 'v1775583510',
-    alt: 'Pura Malta Rugby',
-    es: 'El equipo',
-    en: 'The team',
-    fr: "L'équipe"
-  },
-  {
-    id: 'PUBLIC_ID_3',
-    version: 'v1775583510',
-    alt: 'Pura Malta Rugby',
-    es: 'Tercer tiempo',
-    en: 'After match',
-    fr: 'Troisième mi-temps'
-  },
-  {
-    id: 'PUBLIC_ID_4',
-    version: 'v1775583510',
-    alt: 'Pura Malta Rugby',
-    es: 'La banda',
-    en: 'The crew',
-    fr: 'La bande'
-  },
-  {
-    id: 'PUBLIC_ID_5',
-    version: 'v1775583510',
-    alt: 'Pura Malta Rugby',
-    es: 'La formación',
-    en: 'The lineup',
-    fr: 'La formation'
-  },
-  {
-    id: 'PUBLIC_ID_6',
-    version: 'v1775583510',
-    alt: 'Pura Malta Rugby',
-    es: 'Siempre juntos',
-    en: 'Always together',
-    fr: 'Toujours ensemble'
+    url: 'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_1200,f_auto,q_auto/v1775583510/adc5uald4cj5wi8aaydz.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
   }
-];
-
-const TRANSFORMS = [
-  'w_800,h_1100,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_600,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_900,c_fill,g_faces,f_auto,q_auto',
-  'w_800,h_700,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_1000,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_550,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_1200,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_650,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_950,c_fill,g_auto,f_auto,q_auto',
-  'w_800,h_600,c_fill,g_north,f_auto,q_auto',
-  'w_800,h_800,c_fill,g_south,f_auto,q_auto',
-  'w_800,h_750,c_fill,g_auto,f_auto,q_auto'
+  {
+    url: 'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_1200,f_auto,q_auto/v1775583510/adc5uald4cj5wi8aaydz.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_1200,f_auto,q_auto/v1775583510/adc5uald4cj5wi8aaydz.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_1200,f_auto,q_auto/v1775583510/adc5uald4cj5wi8aaydz.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_1200,f_auto,q_auto/v1775583510/adc5uald4cj5wi8aaydz.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918426/rp5karwifmnbro8j9qr1.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918428/wllm2izuczqo4bxe3j29.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
+  {
+    url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918466/wgun6j0cwykcdyd6dikk.jpg',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  }
 ];
 
 const gallery = document.getElementById('gallery');
 
 IMAGES.forEach((img, i) => {
-  const transform = TRANSFORMS[i % TRANSFORMS.length];
-  const url = `https://res.cloudinary.com/dy9zeeo5g/image/upload/${transform}/${img.version}/${img.id}.jpg`;
-
   const item = document.createElement('div');
   item.className = 'masonry-item fi';
   item.style.transitionDelay = (i * 0.06) + 's';
 
   item.innerHTML = `
-    <img src="${url}" alt="${img.alt}" loading="lazy" onerror="this.parentElement.style.display='none'">
+    <img src="${img.url}" loading="lazy" onerror="this.parentElement.style.display='none'">
     <div class="img-overlay">
       <span class="img-overlay-text">
         <span data-lang="es">${img.es}</span>
@@ -1264,9 +1252,11 @@ IMAGES.forEach((img, i) => {
     </div>
   `;
 
-  item.addEventListener('click', () => openLb(url));
+  item.addEventListener('click', () => openLb(img.url));
   gallery.appendChild(item);
 });
+
+/* ---- LIGHTBOX ---- */
 
 function openLb(src) {
   document.getElementById('lb-img').src = src;
