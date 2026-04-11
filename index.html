@@ -1176,6 +1176,58 @@ function setLang(l) {
 }
 
 /* ---- GALLERY ---- */
+
+const IMAGES = [
+  {
+    id: 'adc5uald4cj5wi8aaydz',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'El equipo',
+    en: 'The team',
+    fr: "L'équipe"
+  },
+  {
+    id: 'PUBLIC_ID_2',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'En cancha',
+    en: 'On the field',
+    fr: 'Sur le terrain'
+  },
+  {
+    id: 'PUBLIC_ID_3',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'Tercer tiempo',
+    en: 'After match',
+    fr: 'Troisième mi-temps'
+  },
+  {
+    id: 'PUBLIC_ID_4',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'La banda',
+    en: 'The crew',
+    fr: 'La bande'
+  },
+  {
+    id: 'PUBLIC_ID_5',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'La formación',
+    en: 'The lineup',
+    fr: 'La formation'
+  },
+  {
+    id: 'PUBLIC_ID_6',
+    version: 'v1775583510',
+    alt: 'Pura Malta Rugby',
+    es: 'Siempre juntos',
+    en: 'Always together',
+    fr: 'Toujours ensemble'
+  }
+];
+
 const TRANSFORMS = [
   'w_800,h_1100,c_fill,g_auto,f_auto,q_auto',
   'w_800,h_600,c_fill,g_auto,f_auto,q_auto',
@@ -1188,30 +1240,30 @@ const TRANSFORMS = [
   'w_800,h_950,c_fill,g_auto,f_auto,q_auto',
   'w_800,h_600,c_fill,g_north,f_auto,q_auto',
   'w_800,h_800,c_fill,g_south,f_auto,q_auto',
-  'w_800,h_750,c_fill,g_auto,f_auto,q_auto',
+  'w_800,h_750,c_fill,g_auto,f_auto,q_auto'
 ];
-
-const LABELS_ES = ['El equipo','En cancha','Tercer tiempo','La banda','La formación','Siempre juntos','Partido','Clásico','Los pibes','Descanso','El scrum','Festejo'];
-const LABELS_EN = ['The team','On the field','After match','The crew','The lineup','Always together','Match day','Classic','The boys','Half time','The scrum','Celebration'];
-const LABELS_FR = ['L\'équipe','Sur le terrain','Troisième mi-temps','La bande','La formation','Toujours ensemble','Jour de match','Le classique','Les gars','La pause','Le scrum','Célébration'];
 
 const gallery = document.getElementById('gallery');
 
-TRANSFORMS.forEach((t, i) => {
-  const url = 'https://res.cloudinary.com/dy9zeeo5g/image/upload/' + t + '/v1775583510/adc5uald4cj5wi8aaydz.jpg';
+IMAGES.forEach((img, i) => {
+  const transform = TRANSFORMS[i % TRANSFORMS.length];
+  const url = `https://res.cloudinary.com/dy9zeeo5g/image/upload/${transform}/${img.version}/${img.id}.jpg`;
+
   const item = document.createElement('div');
   item.className = 'masonry-item fi';
   item.style.transitionDelay = (i * 0.06) + 's';
+
   item.innerHTML = `
-    <img src="${url}" alt="Pura Malta Rugby" loading="lazy" onerror="this.parentElement.style.display='none'">
+    <img src="${url}" alt="${img.alt}" loading="lazy" onerror="this.parentElement.style.display='none'">
     <div class="img-overlay">
       <span class="img-overlay-text">
-        <span data-lang="es">${LABELS_ES[i]}</span>
-        <span data-lang="en">${LABELS_EN[i]}</span>
-        <span data-lang="fr">${LABELS_FR[i]}</span>
+        <span data-lang="es">${img.es}</span>
+        <span data-lang="en">${img.en}</span>
+        <span data-lang="fr">${img.fr}</span>
       </span>
     </div>
   `;
+
   item.addEventListener('click', () => openLb(url));
   gallery.appendChild(item);
 });
@@ -1220,11 +1272,18 @@ function openLb(src) {
   document.getElementById('lb-img').src = src;
   document.getElementById('lightbox').classList.add('open');
 }
+
 function closeLb() {
   document.getElementById('lightbox').classList.remove('open');
 }
-document.getElementById('lightbox').addEventListener('click', function(e){ if(e.target===this) closeLb(); });
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLb();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLb();
+});
 
 /* ---- PLANTEL ---- */
 const plantel = [
