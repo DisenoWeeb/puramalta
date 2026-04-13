@@ -26,52 +26,29 @@
 html { scroll-behavior: smooth; }
 body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
 
-/* =============================================
-   JARRA DE CERVEZA
-   ============================================= */
+/* JARRA */
 .beer-widget {
   position: fixed; bottom: 28px; right: 28px; z-index: 250;
   display: flex; flex-direction: column; align-items: center; gap: 5px;
   cursor: default; user-select: none;
 }
-.beer-pct {
-  font-family: 'Oswald', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  color: var(--text-muted); transition: color .3s; line-height: 1;
-}
+.beer-pct { font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); transition: color .3s; line-height: 1; }
 .beer-widget.full .beer-pct { color: #F5C842; }
 .beer-svg-wrap { width: 44px; height: 42px; position: relative; }
 .beer-svg-wrap svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 4px 14px rgba(245,200,66,.18)); }
 .beer-bubble { opacity: 0; transition: opacity .4s; }
 .beer-widget.foamy .beer-bubble { opacity: 1; }
-@keyframes cheers {
-  0%   { transform: rotate(0deg) translateY(0); }
-  20%  { transform: rotate(-14deg) translateY(-5px); }
-  50%  { transform: rotate(10deg) translateY(-2px); }
-  75%  { transform: rotate(-5deg) translateY(-1px); }
-  100% { transform: rotate(0deg) translateY(0); }
-}
+@keyframes cheers { 0% { transform: rotate(0deg) translateY(0); } 20% { transform: rotate(-14deg) translateY(-5px); } 50% { transform: rotate(10deg) translateY(-2px); } 75% { transform: rotate(-5deg) translateY(-1px); } 100% { transform: rotate(0deg) translateY(0); } }
 .beer-widget.cheers .beer-svg-wrap { animation: cheers .75s ease; }
 
-/* LANG SWITCHER */
+/* LANG */
 .lang-switch { position: fixed; top: 68px; right: 56px; z-index: 300; display: flex; gap: 2px; }
-.lang-btn {
-  background: rgba(6,6,8,.85); border: 1px solid rgba(26,123,196,.25);
-  color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-  padding: 5px 10px; cursor: pointer; transition: all .2s;
-}
+.lang-btn { background: rgba(6,6,8,.85); border: 1px solid rgba(26,123,196,.25); color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; cursor: pointer; transition: all .2s; }
 .lang-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 .lang-btn:hover:not(.active) { border-color: var(--blue-light); color: var(--blue-light); }
 
 /* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 48px; height: 64px;
-  background: linear-gradient(to bottom, rgba(6,6,8,.98) 60%, transparent);
-  border-bottom: 1px solid rgba(26,123,196,.08);
-}
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 0 48px; height: 64px; background: linear-gradient(to bottom, rgba(6,6,8,.98) 60%, transparent); border-bottom: 1px solid rgba(26,123,196,.08); }
 .nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .nav-logo { height: 40px; width: auto; }
 .nav-brand-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 6px; color: var(--blue-light); text-transform: uppercase; }
@@ -82,10 +59,7 @@ nav {
 /* HERO */
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.45; }
-.hero-video-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom, rgba(6,6,8,.72) 0%, rgba(6,6,8,.3) 40%, rgba(6,6,8,.55) 80%, rgba(6,6,8,.92) 100%), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,58,110,.35) 0%, transparent 70%);
-}
+.hero-video-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(6,6,8,.72) 0%, rgba(6,6,8,.3) 40%, rgba(6,6,8,.55) 80%, rgba(6,6,8,.92) 100%), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,58,110,.35) 0%, transparent 70%); }
 .hero > *:not(.hero-video):not(.hero-video-overlay) { position: relative; z-index: 2; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 1; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(26,123,196,.08) 0%, transparent 65%); }
 .hero-stripes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: .015; z-index: 1; }
@@ -178,6 +152,88 @@ nav {
 .iblock-body { margin-top: 14px; font-size: 14px; color: var(--text-dim); line-height: 1.75; font-weight: 300; }
 .hl { color: var(--blue-light); }
 
+/* =============================================
+   SPONSORS
+   ============================================= */
+.sponsor-section {
+  padding: 80px 48px;
+  background: var(--dark);
+  border-top: 1px solid var(--mid2);
+  border-bottom: 1px solid var(--mid2);
+}
+.sponsor-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 40px;
+  display: flex; align-items: center; gap: 14px;
+}
+.sponsor-eyebrow::before,
+.sponsor-eyebrow::after { content:''; flex:1; height:1px; background:var(--mid2); }
+.sponsor-inner {
+  display: flex; align-items: center; gap: 64px; flex-wrap: wrap;
+  max-width: 900px; margin: 0 auto;
+}
+.sponsor-text { flex: 1; min-width: 220px; }
+.sponsor-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 10px;
+}
+.sponsor-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 52px); font-weight: 900;
+  text-transform: uppercase; color: var(--text); line-height: .9; margin-bottom: 14px;
+}
+.sponsor-name em { color: var(--blue-light); font-style: normal; }
+.sponsor-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; color: var(--text-dim); font-weight: 300; line-height: 1.75;
+}
+.sponsor-cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 22px; padding: 11px 24px;
+  border: 1px solid rgba(26,123,196,.35);
+  background: rgba(26,123,196,.08);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue-light); text-decoration: none; transition: all .25s;
+}
+.sponsor-cta:hover { background: rgba(26,123,196,.18); border-color: var(--blue-light); }
+.sponsor-cta svg { width: 14px; height: 14px; flex-shrink: 0; }
+.sponsor-logo-wrap { flex-shrink: 0; }
+.sponsor-logo-card {
+  width: 240px; height: 170px;
+  border: 1px solid rgba(26,123,196,.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  /* gradiente blanco → azul pálido para que el logo negro se vea */
+  background: linear-gradient(135deg, #ffffff 0%, #e8f3fb 45%, #cde3f5 100%);
+  box-shadow: 0 0 40px rgba(61,165,240,.10);
+  transition: box-shadow .3s;
+}
+.sponsor-logo-card:hover { box-shadow: 0 0 56px rgba(61,165,240,.22); }
+/* destello sutil en esquina superior */
+.sponsor-logo-card::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle at top right, rgba(26,123,196,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sponsor-logo-card-banner {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 5px 10px;
+  background: rgba(21,83,160,.88);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 600; letter-spacing: 3px;
+  text-align: center; color: #fff; text-transform: uppercase;
+}
+.sponsor-logo-card img {
+  width: 175px; height: auto; object-fit: contain;
+  position: relative; z-index: 1;
+}
+
 /* DONDE */
 .donde-section { padding: 100px 48px 0; background: var(--dark); }
 .donde-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; margin-top: 52px; }
@@ -226,6 +282,9 @@ footer { padding: 48px; border-top: 1px solid var(--mid2); display: flex; justif
   .sep { padding: 0 20px; } .gallery-section { padding: 60px 20px 80px; } .masonry { columns: 2 160px; }
   .manifiesto { grid-template-columns: 1fr; gap: 48px; padding: 80px 20px; }
   .plantel { padding: 60px 20px 80px; } .info-section { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  .sponsor-section { padding: 60px 20px; }
+  .sponsor-inner { gap: 36px; }
+  .sponsor-logo-card { width: 100%; height: 160px; }
   .donde-section { padding: 80px 20px 0; } .donde-inner { grid-template-columns: 1fr; gap: 40px; }
   .map-frame { height: 300px; }
   footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; } .foot-right { text-align: left; }
@@ -251,15 +310,13 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
 </head>
 <body class="lang-es">
 
-<!-- JARRA DE CERVEZA — scroll progress -->
+<!-- JARRA DE CERVEZA -->
 <div class="beer-widget" id="beerWidget">
   <div class="beer-pct" id="beerPct">0%</div>
   <div class="beer-svg-wrap">
     <svg viewBox="0 0 54 72" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <clipPath id="mugClip">
-          <path d="M10 14 L8 62 L46 62 L44 14 Z"/>
-        </clipPath>
+        <clipPath id="mugClip"><path d="M10 14 L8 62 L46 62 L44 14 Z"/></clipPath>
         <linearGradient id="beerGrad" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%"   stop-color="#B8780A"/>
           <stop offset="45%"  stop-color="#F5C842"/>
@@ -271,13 +328,9 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
           <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
         </linearGradient>
       </defs>
-
-      <!-- LÍQUIDO con clip -->
       <g clip-path="url(#mugClip)">
         <rect id="beerLiquid" x="0" y="62" width="54" height="0" fill="url(#beerGrad)" opacity="0.9"/>
-        <!-- brillo lateral izquierdo del líquido -->
         <rect id="beerShine" x="13" y="62" width="4" height="0" fill="rgba(255,255,255,0.2)" rx="2"/>
-        <!-- burbujas internas -->
         <g id="bubbles" style="opacity:0;transition:opacity .5s">
           <circle cx="17" cy="52" r="1.3" fill="rgba(255,255,255,0.4)"/>
           <circle cx="27" cy="44" r="1.0" fill="rgba(255,255,255,0.3)"/>
@@ -287,23 +340,11 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
           <circle cx="24" cy="57" r="1.0" fill="rgba(255,255,255,0.3)"/>
         </g>
       </g>
-
-      <!-- CUERPO EXTERNO de la jarra (vidrio) -->
-      <path d="M8 12 Q8 10 10 10 L44 10 Q46 10 46 12 L48 62 Q48 64 46 64 L8 64 Q6 64 6 62 Z"
-            fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
-      <!-- brillo vidrio -->
-      <path d="M8 12 Q8 10 10 10 L44 10 Q46 10 46 12 L48 62 Q48 64 46 64 L8 64 Q6 64 6 62 Z"
-            fill="url(#mugShine)"/>
-      <!-- línea de luz izquierda -->
+      <path d="M8 12 Q8 10 10 10 L44 10 Q46 10 46 12 L48 62 Q48 64 46 64 L8 64 Q6 64 6 62 Z" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+      <path d="M8 12 Q8 10 10 10 L44 10 Q46 10 46 12 L48 62 Q48 64 46 64 L8 64 Q6 64 6 62 Z" fill="url(#mugShine)"/>
       <path d="M12 14 L10 61" stroke="rgba(255,255,255,0.1)" stroke-width="2.5" stroke-linecap="round"/>
-
-      <!-- ASA -->
-      <path d="M46 22 Q61 22 61 36 Q61 50 46 50"
-            fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M46 25 Q58 25 58 36 Q58 47 46 47"
-            fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-linecap="round"/>
-
-      <!-- ESPUMA (aparece con JS) -->
+      <path d="M46 22 Q61 22 61 36 Q61 50 46 50" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M46 25 Q58 25 58 36 Q58 47 46 47" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-linecap="round"/>
       <g id="foamGroup" style="opacity:0;transition:opacity .5s">
         <ellipse cx="27" cy="10.5" rx="18" ry="4.5" fill="#EDE8D5"/>
         <circle cx="13" cy="10"  r="4.5"  fill="#FAF6E8"/>
@@ -311,15 +352,11 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
         <circle cx="27" cy="6.5" r="5.5"  fill="#FAF6E8"/>
         <circle cx="34" cy="7.5" r="5"    fill="#EDE8D5"/>
         <circle cx="41" cy="10"  r="4.5"  fill="#FAF6E8"/>
-        <!-- burbujas de espuma extra -->
-        <circle class="beer-bubble" cx="17" cy="7"  r="2.2" fill="#FAF6E8" opacity="0.8"/>
-        <circle class="beer-bubble" cx="31" cy="4.5" r="2.4" fill="#EDE8D5" opacity="0.7"/>
-        <circle class="beer-bubble" cx="38" cy="6.5" r="1.9" fill="#FAF6E8" opacity="0.75"/>
+        <circle class="beer-bubble" cx="17" cy="7"   r="2.2" fill="#FAF6E8" opacity="0.8"/>
+        <circle class="beer-bubble" cx="31" cy="4.5"  r="2.4" fill="#EDE8D5" opacity="0.7"/>
+        <circle class="beer-bubble" cx="38" cy="6.5"  r="1.9" fill="#FAF6E8" opacity="0.75"/>
       </g>
-
-      <!-- borde superior (delante de espuma) -->
-      <path d="M7 12 Q7 9 10 9 L44 9 Q47 9 47 12"
-            fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+      <path d="M7 12 Q7 9 10 9 L44 9 Q47 9 47 12" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
     </svg>
   </div>
 </div>
@@ -352,7 +389,6 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
   <div class="hero-video-overlay"></div>
   <div class="hero-bg"></div>
   <div class="hero-stripes"></div>
-
   <div class="hero-logo-wrap fi">
     <div class="ring"></div><div class="ring"></div>
     <img class="hero-shield" src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Escudo Pura Malta" onerror="this.style.display='none'">
@@ -462,11 +498,51 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
     <p class="iblock-body" data-lang="fr">Comercial Rugby Club, Buenos Aires. Un coin entre les collines où chaque samedi cette équipe se retrouve — l'amitié élevée au rang de rituel.</p>
   </div>
   <div class="iblock fi" style="transition-delay:.2s">
-    <div class="iblock-eye" data-lang="es">Redes & Contacto</div><div class="iblock-eye" data-lang="en">Social & Contact</div><div class="iblock-eye" data-lang="fr">Réseaux & Contact</div>
+    <div class="iblock-eye" data-lang="es">Redes &amp; Contacto</div><div class="iblock-eye" data-lang="en">Social &amp; Contact</div><div class="iblock-eye" data-lang="fr">Réseaux &amp; Contact</div>
     <div class="iblock-val">@Puramalta_rugby</div>
     <p class="iblock-body" data-lang="es">Instagram y el boca en boca de siempre. Para sumarte escribí a <span class="hl">puramalta.226@gmail.com</span></p>
     <p class="iblock-body" data-lang="en">Instagram and word of mouth. To join the team write to <span class="hl">puramalta.226@gmail.com</span></p>
     <p class="iblock-body" data-lang="fr">Instagram et le bouche à oreille. Pour nous rejoindre, écrivez à <span class="hl">puramalta.226@gmail.com</span></p>
+  </div>
+</section>
+
+<!-- =============================================
+     SPONSORS
+     ============================================= -->
+<section class="sponsor-section fi">
+  <div class="sponsor-eyebrow">
+    <span data-lang="es">Auspiciantes</span>
+    <span data-lang="en">Sponsors</span>
+    <span data-lang="fr">Partenaires</span>
+  </div>
+  <div class="sponsor-inner">
+    <div class="sponsor-text">
+      <div class="sponsor-label">
+        <span data-lang="es">Sponsor oficial 2026</span>
+        <span data-lang="en">Official sponsor 2026</span>
+        <span data-lang="fr">Sponsor officiel 2026</span>
+      </div>
+      <div class="sponsor-name">Mar del Plata<br><em>Gin</em></div>
+      <p class="sponsor-desc" data-lang="es">El gin artesanal de nuestra ciudad. Orgullo marplatense, compañero inseparable del tercer tiempo.</p>
+      <p class="sponsor-desc" data-lang="en">The craft gin of our city. Marplatense pride and the perfect companion for the after-match.</p>
+      <p class="sponsor-desc" data-lang="fr">Le gin artisanal de notre ville. La fierté de Mar del Plata, compagnon incontournable de l'après-match.</p>
+      <a class="sponsor-cta" href="https://instagram.com/mardelplatagin" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @mardelplatagin
+      </a>
+    </div>
+    <div class="sponsor-logo-wrap">
+      <a href="https://instagram.com/mardelplatagin" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
+        <div class="sponsor-logo-card">
+          <img src="https://res.cloudinary.com/dwgwbdtud/image/upload/v1776084708/qz4alplsg8hvgg1doxxy.png" alt="Mar del Plata Gin">
+          <div class="sponsor-logo-card-banner">
+            <span data-lang="es">Sponsor Oficial</span>
+            <span data-lang="en">Official Sponsor</span>
+            <span data-lang="fr">Sponsor Officiel</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -556,7 +632,6 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
 </footer>
 
 <script>
-/* ---- LANGUAGE ---- */
 function setLang(l) {
   document.body.className = 'lang-' + l;
   document.getElementById('btn-es').classList.toggle('active', l === 'es');
@@ -564,9 +639,6 @@ function setLang(l) {
   document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
 }
 
-/* ============================================================
-   JARRA DE CERVEZA — scroll progress
-   ============================================================ */
 (function() {
   const widget   = document.getElementById('beerWidget');
   const liquid   = document.getElementById('beerLiquid');
@@ -574,59 +646,36 @@ function setLang(l) {
   const bubbles  = document.getElementById('bubbles');
   const foam     = document.getElementById('foamGroup');
   const pctLabel = document.getElementById('beerPct');
-
-  // Rect líquido: sube desde y=62 hasta y=14 (altura máx 48px)
-  const BOT  = 62;
-  const TOP  = 14;
-  const FULL = BOT - TOP; // 48
-
-  let lastPct  = -1;
-  let wasFull  = false;
-
+  const BOT = 62, TOP = 14, FULL = BOT - TOP;
+  let lastPct = -1, wasFull = false;
   function update() {
     const scrolled  = window.scrollY || document.documentElement.scrollTop;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const pct       = maxScroll > 0 ? Math.min(1, scrolled / maxScroll) : 0;
     const pctInt    = Math.round(pct * 100);
-
     if (pctInt === lastPct) return;
     lastPct = pctInt;
-
     pctLabel.textContent = pctInt + '%';
-
     const fillH = FULL * pct;
     const newY  = BOT - fillH;
-
-    liquid.setAttribute('y',      newY);
+    liquid.setAttribute('y', newY);
     liquid.setAttribute('height', fillH);
-
-    shine.setAttribute('y',      newY + 5);
+    shine.setAttribute('y', newY + 5);
     shine.setAttribute('height', Math.max(0, fillH - 10));
-
-    // burbujas internas: aparecen desde 15%
     bubbles.style.opacity = pct > 0.15 ? String(Math.min(1, (pct - 0.15) / 0.25)) : '0';
-
-    // espuma: aparece desde 35%
     foam.style.opacity = pct > 0.35 ? String(Math.min(1, (pct - 0.35) / 0.3)) : '0';
-
     widget.classList.toggle('foamy', pct > 0.68);
     widget.classList.toggle('full',  pct >= 0.99);
-
-    // salud al llegar al 100%
     if (pct >= 0.99 && !wasFull) {
       wasFull = true;
       widget.classList.add('cheers');
       setTimeout(() => widget.classList.remove('cheers'), 850);
-    } else if (pct < 0.95) {
-      wasFull = false;
-    }
+    } else if (pct < 0.95) { wasFull = false; }
   }
-
   window.addEventListener('scroll', update, { passive: true });
   update();
 })();
 
-/* ---- GALLERY ---- */
 const IMAGES = [
   { url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918422/obdqdyqcsls4b57wcfqw.jpg', es: 'El equipo',  en: 'The team',     fr: "L'équipe" },
   { url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918422/mzdfj3zn9vvm7yiobqbj.jpg', es: 'El equipo',  en: 'The team',     fr: "L'équipe" },
@@ -638,31 +687,20 @@ const IMAGES = [
   { url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918425/ek8iplcqhcymsqk7w3lm.jpg', es: 'En cancha', en: 'On the field', fr: 'Sur le terrain' },
   { url: 'https://res.cloudinary.com/dwgwbdtud/image/upload/v1775918421/m8e0f3gjvoenwe7borzi.jpg', es: 'En cancha', en: 'On the field', fr: 'Sur le terrain' },
 ];
-
 const gallery = document.getElementById('gallery');
 IMAGES.forEach((img, i) => {
   const item = document.createElement('div');
   item.className = 'masonry-item fi';
   item.style.transitionDelay = (i * 0.06) + 's';
-  item.innerHTML = `
-    <img src="${img.url}" loading="lazy" onerror="this.parentElement.style.display='none'">
-    <div class="img-overlay">
-      <span class="img-overlay-text">
-        <span data-lang="es">${img.es}</span>
-        <span data-lang="en">${img.en}</span>
-        <span data-lang="fr">${img.fr}</span>
-      </span>
-    </div>`;
+  item.innerHTML = `<img src="${img.url}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="img-overlay"><span class="img-overlay-text"><span data-lang="es">${img.es}</span><span data-lang="en">${img.en}</span><span data-lang="fr">${img.fr}</span></span></div>`;
   item.addEventListener('click', () => openLb(img.url));
   gallery.appendChild(item);
 });
-
 function openLb(src) { document.getElementById('lb-img').src = src; document.getElementById('lightbox').classList.add('open'); }
 function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
 document.getElementById('lightbox').addEventListener('click', function(e){ if(e.target===this) closeLb(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
 
-/* ---- PLANTEL ---- */
 const plantel = [
   { name:'Marcelo "Tano" Vapore',    avatar:'https://res.cloudinary.com/dy9zeeo5g/image/upload/w_300,h_300,c_fill,f_auto,q_auto/v1775582330/ji5xkinhqy41winbs1xb.webp', cargo_es:'Capitán',  cargo_en:'Captain',  cargo_fr:'Capitaine', edad:58, cervezas:7,  asados:22, bebida_es:'Fernet puro',    bebida_en:'Pure Fernet',   bebida_fr:'Fernet pur',       chistes:3 },
   { name:'Fernando Tami',            avatar:'https://res.cloudinary.com/dy9zeeo5g/image/upload/f_auto,q_auto/v1775602278/mkfxk5twh7qkivltfb7c.jpg',                    cargo_es:'Admin',    cargo_en:'Admin',    cargo_fr:'Admin',     edad:68, cervezas:4,  asados:30, bebida_es:'Vino tinto',     bebida_en:'Red wine',      bebida_fr:'Vin rouge',        chistes:8 },
@@ -738,7 +776,6 @@ plantel.forEach((j, i) => {
   grid.appendChild(c);
 });
 
-/* ---- INTERSECTION OBSERVER ---- */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
 }, { threshold: 0.06 });
