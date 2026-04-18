@@ -21,6 +21,7 @@
   --text-dim:   #8A93B0;
   --text-muted: #4A5068;
   --accent:     #3DA5F0;
+  --wa:         #25D366;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -41,6 +42,23 @@ body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-
 @keyframes cheers { 0% { transform: rotate(0deg) translateY(0); } 20% { transform: rotate(-14deg) translateY(-5px); } 50% { transform: rotate(10deg) translateY(-2px); } 75% { transform: rotate(-5deg) translateY(-1px); } 100% { transform: rotate(0deg) translateY(0); } }
 .beer-widget.cheers .beer-svg-wrap { animation: cheers .75s ease; }
 
+/* WHATSAPP FLOTANTE */
+.wa-float {
+  position: fixed; bottom: 28px; left: 28px; z-index: 250;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45);
+  cursor: pointer; text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  border: 2px solid rgba(255,255,255,.15);
+}
+.wa-float:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,.6);
+}
+.wa-float svg { width: 28px; height: 28px; flex-shrink: 0; }
+
 /* LANG */
 .lang-switch { position: fixed; top: 68px; right: 56px; z-index: 300; display: flex; gap: 2px; }
 .lang-btn { background: rgba(6,6,8,.85); border: 1px solid rgba(26,123,196,.25); color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; cursor: pointer; transition: all .2s; }
@@ -48,13 +66,110 @@ body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-
 .lang-btn:hover:not(.active) { border-color: var(--blue-light); color: var(--blue-light); }
 
 /* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 0 48px; height: 64px; background: linear-gradient(to bottom, rgba(6,6,8,.98) 60%, transparent); border-bottom: 1px solid rgba(26,123,196,.08); }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: linear-gradient(to bottom, rgba(6,6,8,.98) 60%, transparent);
+  border-bottom: 1px solid rgba(26,123,196,.08);
+}
 .nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .nav-logo { height: 40px; width: auto; }
 .nav-brand-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 6px; color: var(--blue-light); text-transform: uppercase; }
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a { color: var(--text-muted); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; transition: color .2s; }
+
+/* Desktop nav links */
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase; transition: color .2s;
+}
 .nav-links a:hover { color: var(--blue-light); }
+
+/* Admin button in nav */
+.nav-admin-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px;
+  border: 1px solid rgba(26,123,196,.35);
+  background: rgba(26,123,196,.1);
+  border-radius: 6px;
+  color: var(--blue-light) !important;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background .2s, border-color .2s !important;
+}
+.nav-admin-btn:hover {
+  background: rgba(26,123,196,.22) !important;
+  border-color: var(--blue-light) !important;
+  color: var(--blue-light) !important;
+}
+.nav-admin-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 40px; height: 40px;
+  background: rgba(26,123,196,.08);
+  border: 1px solid rgba(26,123,196,.25);
+  border-radius: 8px; cursor: pointer;
+  transition: background .2s;
+}
+.nav-hamburger:hover { background: rgba(26,123,196,.18); }
+.nav-hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--blue-light);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu drawer */
+.mobile-menu {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 190;
+  background: rgba(6,6,8,.98);
+  border-bottom: 1px solid rgba(26,123,196,.15);
+  backdrop-filter: blur(16px);
+  transform: translateY(-110%);
+  transition: transform .3s ease;
+  padding: 20px 24px 28px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.mobile-menu.open { transform: translateY(0); }
+
+.mobile-menu a, .mobile-menu button {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  color: var(--text-dim); text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  background: transparent; border: none; cursor: pointer;
+  transition: background .2s, color .2s;
+  text-align: left; width: 100%;
+}
+.mobile-menu a:hover, .mobile-menu button:hover {
+  background: rgba(26,123,196,.1);
+  color: var(--blue-light);
+}
+.mobile-menu .mob-sep {
+  height: 1px; background: rgba(26,123,196,.12); margin: 8px 0;
+}
+.mobile-menu .mob-admin {
+  background: rgba(26,123,196,.12);
+  border: 1px solid rgba(26,123,196,.3);
+  color: var(--blue-light) !important;
+  margin-top: 4px;
+}
+.mobile-menu .mob-admin:hover {
+  background: rgba(26,123,196,.22) !important;
+}
+.mobile-menu svg { width: 16px; height: 16px; flex-shrink: 0; opacity: .7; }
+.mobile-menu .mob-admin svg { opacity: 1; }
 
 /* HERO */
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
@@ -152,9 +267,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; j
 .iblock-body { margin-top: 14px; font-size: 14px; color: var(--text-dim); line-height: 1.75; font-weight: 300; }
 .hl { color: var(--blue-light); }
 
-/* =============================================
-   SPONSORS
-   ============================================= */
+/* SPONSORS */
 .sponsor-section {
   padding: 80px 48px;
   background: var(--dark);
@@ -207,14 +320,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; j
   border: 1px solid rgba(26,123,196,.2);
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
-  /* gradiente blanco → azul pálido para que el logo negro se vea */
   background: linear-gradient(135deg, #ffffff 0%, #e8f3fb 45%, #cde3f5 100%);
   box-shadow: 0 0 40px rgba(61,165,240,.10);
   transition: box-shadow .3s;
   padding: 10px;
 }
 .sponsor-logo-card:hover { box-shadow: 0 0 56px rgba(61,165,240,.22); }
-/* destello sutil en esquina superior */
 .sponsor-logo-card::before {
   content: '';
   position: absolute; top: 0; right: 0;
@@ -263,6 +374,43 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; j
 .donde-horario-val { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: 1px; }
 .donde-horario-sep { width: 1px; height: 28px; background: var(--mid2); }
 
+/* CUSTOM MAP MARKER */
+.map-marker-overlay {
+  position: absolute;
+  /* centrado sobre el pin del iframe — ajustable */
+  top: 38%; left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 3; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.map-marker-bubble {
+  background: rgba(6,6,8,.95);
+  border: 2px solid var(--blue-light);
+  border-radius: 12px;
+  padding: 7px 10px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 20px rgba(26,123,196,.45);
+  white-space: nowrap;
+}
+.map-marker-bubble img {
+  height: 28px; width: auto;
+  filter: drop-shadow(0 0 4px rgba(61,165,240,.4));
+}
+.map-marker-bubble span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--blue-light);
+}
+.map-marker-tail {
+  width: 2px; height: 14px;
+  background: linear-gradient(to bottom, var(--blue-light), transparent);
+}
+.map-marker-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--blue-light);
+  box-shadow: 0 0 10px rgba(61,165,240,.7);
+}
+
 /* FOOTER */
 footer { padding: 48px; border-top: 1px solid var(--mid2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; background: var(--black); margin-top: 80px; }
 .foot-brand { display: flex; align-items: center; gap: 16px; }
@@ -274,7 +422,10 @@ footer { padding: 48px; border-top: 1px solid var(--mid2); display: flex; justif
 
 /* MOBILE */
 @media (max-width: 900px) {
-  nav { padding: 0 16px; } .nav-links { display: none; } .lang-switch { right: 16px; }
+  nav { padding: 0 16px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .lang-switch { right: 16px; top: 72px; }
   .hero { padding: 100px 20px 60px; }
   .ring:nth-child(1) { width: 220px; height: 220px; } .ring:nth-child(2) { width: 270px; height: 270px; }
   .hero-band { flex-direction: column; }
@@ -290,6 +441,7 @@ footer { padding: 48px; border-top: 1px solid var(--mid2); display: flex; justif
   .map-frame { height: 300px; }
   footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; } .foot-right { text-align: left; }
   .beer-widget { bottom: 16px; right: 16px; }
+  .wa-float { bottom: 16px; left: 16px; }
 }
 
 /* FADE IN */
@@ -362,6 +514,15 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
   </div>
 </div>
 
+<!-- WHATSAPP FLOTANTE -->
+<a class="wa-float"
+   href="https://wa.me/5492236876730?text=Hola%20Pura%20Malta!"
+   target="_blank" rel="noopener" aria-label="WhatsApp Pura Malta">
+  <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
 <!-- LANG SWITCH -->
 <div class="lang-switch">
   <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
@@ -369,19 +530,75 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
   <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
 </div>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-brand">
     <img class="nav-logo" src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Pura Malta" onerror="this.style.display='none'">
     <span class="nav-brand-name">PURA MALTA</span>
   </a>
+
+  <!-- Desktop links -->
   <ul class="nav-links">
     <li><a href="#nosotros"><span data-lang="es">Nosotros</span><span data-lang="en">About</span><span data-lang="fr">À propos</span></a></li>
     <li><a href="#galeria"><span data-lang="es">Galería</span><span data-lang="en">Gallery</span><span data-lang="fr">Galerie</span></a></li>
     <li><a href="#plantel"><span data-lang="es">Plantel</span><span data-lang="en">Squad</span><span data-lang="fr">Équipe</span></a></li>
     <li><a href="#club"><span data-lang="es">Club</span><span data-lang="en">Club</span><span data-lang="fr">Club</span></a></li>
     <li><a href="#donde"><span data-lang="es">Ubicación</span><span data-lang="en">Location</span><span data-lang="fr">Localisation</span></a></li>
+    <li><a href="#tienda"><span data-lang="es">Tienda</span><span data-lang="en">Shop</span><span data-lang="fr">Boutique</span></a></li>
+    <li>
+      <a href="https://disenoweeb.github.io/tiendawhatsapp/admin.html" class="nav-admin-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          <path d="M16 11l1.5 1.5L20 10"/>
+        </svg>
+        Admin
+      </a>
+    </li>
   </ul>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#nosotros" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <span data-lang="es">Nosotros</span><span data-lang="en">About</span><span data-lang="fr">À propos</span>
+  </a>
+  <a href="#galeria" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span data-lang="es">Galería</span><span data-lang="en">Gallery</span><span data-lang="fr">Galerie</span>
+  </a>
+  <a href="#plantel" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span data-lang="es">Plantel</span><span data-lang="en">Squad</span><span data-lang="fr">Équipe</span>
+  </a>
+  <a href="#club" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Club
+  </a>
+  <a href="#donde" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span data-lang="es">Ubicación</span><span data-lang="en">Location</span><span data-lang="fr">Localisation</span>
+  </a>
+  <a href="#tienda" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span data-lang="es">Tienda</span><span data-lang="en">Shop</span><span data-lang="fr">Boutique</span>
+  </a>
+  <div class="mob-sep"></div>
+  <a href="https://disenoweeb.github.io/tiendawhatsapp/admin.html" class="mob-admin" target="_blank" rel="noopener" onclick="closeMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      <path d="M16 11l1.5 1.5L20 10"/>
+    </svg>
+    <span data-lang="es">Iniciar sesión — Admin</span><span data-lang="en">Sign in — Admin</span><span data-lang="fr">Connexion — Admin</span>
+  </a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -482,7 +699,7 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
 
 <div class="sep" style="background:var(--dark3)"><div class="sep-line"></div><div class="sep-ico">✦</div><div class="sep-line"></div></div>
 
-<!-- INFO -->
+<!-- INFO / CLUB -->
 <section id="club" class="info-section">
   <div class="iblock fi">
     <div class="iblock-eye" data-lang="es">Fundado</div><div class="iblock-eye" data-lang="en">Founded</div><div class="iblock-eye" data-lang="fr">Fondé</div>
@@ -501,15 +718,13 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
   <div class="iblock fi" style="transition-delay:.2s">
     <div class="iblock-eye" data-lang="es">Redes &amp; Contacto</div><div class="iblock-eye" data-lang="en">Social &amp; Contact</div><div class="iblock-eye" data-lang="fr">Réseaux &amp; Contact</div>
     <div class="iblock-val">@Puramalta_rugby</div>
-    <p class="iblock-body" data-lang="es">Instagram y el boca en boca de siempre. Para sumarte escribí a <span class="hl">puramalta.226@gmail.com</span></p>
-    <p class="iblock-body" data-lang="en">Instagram and word of mouth. To join the team write to <span class="hl">puramalta.226@gmail.com</span></p>
-    <p class="iblock-body" data-lang="fr">Instagram et le bouche à oreille. Pour nous rejoindre, écrivez à <span class="hl">puramalta.226@gmail.com</span></p>
+    <p class="iblock-body" data-lang="es">Instagram y el boca en boca de siempre. Para sumarte escribí a <span class="hl">contacto@puramaltarugby.com</span></p>
+    <p class="iblock-body" data-lang="en">Instagram and word of mouth. To join the team write to <span class="hl">contacto@puramaltarugby.com</span></p>
+    <p class="iblock-body" data-lang="fr">Instagram et le bouche à oreille. Pour nous rejoindre, écrivez à <span class="hl">contacto@puramaltarugby.com</span></p>
   </div>
 </section>
 
-<!-- =============================================
-     SPONSORS
-     ============================================= -->
+<!-- SPONSORS -->
 <section class="sponsor-section fi">
   <div class="sponsor-eyebrow">
     <span data-lang="es">Auspiciantes</span>
@@ -546,10 +761,9 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
     </div>
   </div>
 </section>
-<!-- =============================================
-    Tienda
-     ============================================= -->
-<section class="sponsor-section fi">
+
+<!-- TIENDA -->
+<section id="tienda" class="sponsor-section fi">
   <div class="sponsor-eyebrow">
     <span data-lang="es">Tienda</span>
     <span data-lang="en">Shop</span>
@@ -568,8 +782,7 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
       <p class="sponsor-desc" data-lang="fr">Procurez-vous les produits officiels du club dans notre boutique en ligne. Choisissez votre taille, couleur et quantité, et achetez directement via WhatsApp.</p>
       <a class="sponsor-cta"
          href="https://disenoweeb.github.io/tiendawhatsapp/index.html"
-         target="_self"
-         rel="noopener">
+         target="_self" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
@@ -582,11 +795,9 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
     </div>
     <div class="sponsor-logo-wrap">
       <a href="https://disenoweeb.github.io/tiendawhatsapp/index.html"
-         target="_self"
-         rel="noopener"
-         style="display:block;text-decoration:none;">
+         target="_self" rel="noopener" style="display:block;text-decoration:none;">
         <div class="sponsor-logo-card">
-          <img src="https://res.cloudinary.com/dwgwbdtud/image/upload/v1776209243/netpom9twpvx9hxynax1.png" alt="Tienda Virtual Club Rugby" style="">
+          <img src="https://res.cloudinary.com/dwgwbdtud/image/upload/v1776209243/netpom9twpvx9hxynax1.png" alt="Tienda Virtual Club Rugby">
           <div class="sponsor-logo-card-banner">
             <span data-lang="es">Tienda Oficial</span>
             <span data-lang="en">Official Shop</span>
@@ -597,6 +808,7 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
     </div>
   </div>
 </section>
+
 <div class="sep"><div class="sep-line"></div><div class="sep-ico">✦ CRC 1949 ✦</div><div class="sep-line"></div></div>
 
 <!-- DONDE ESTAMOS -->
@@ -636,10 +848,20 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
         <span data-lang="es">Cómo llegar</span><span data-lang="en">Get directions</span><span data-lang="fr">Itinéraire</span>
       </a>
     </div>
+
     <div class="map-outer fi" style="transition-delay:.2s">
       <div class="map-frame-deco"></div>
-      <div class="map-frame">
+      <div class="map-frame" style="position:relative;">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.5!2d-57.75281431!3d-37.91151438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584d7b1c7e7f8e5%3A0x3a5e9f1c2d4b6a7!2sComercial%20Rugby%20Club!5e0!3m2!1ses!2sar!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Marker personalizado Pura Malta -->
+        <div class="map-marker-overlay">
+          <div class="map-marker-bubble">
+            <img src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Pura Malta">
+            <span>Pura Malta</span>
+          </div>
+          <div class="map-marker-tail"></div>
+          <div class="map-marker-dot"></div>
+        </div>
       </div>
       <div class="map-badge">
         <img class="map-badge-logo" src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Pura Malta" onerror="this.style.display='none'">
@@ -690,6 +912,28 @@ function setLang(l) {
   document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
 }
 
+// Hamburger menu
+const hamburgerBtn  = document.getElementById('hamburgerBtn');
+const mobileMenu    = document.getElementById('mobileMenu');
+
+hamburgerBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', open);
+});
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+}
+
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
+
+// Beer widget
 (function() {
   const widget   = document.getElementById('beerWidget');
   const liquid   = document.getElementById('beerLiquid');
@@ -834,3 +1078,4 @@ document.querySelectorAll('.fi').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
+
