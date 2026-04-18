@@ -180,10 +180,32 @@ nav {
 .hero-stripes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: .015; z-index: 1; }
 .hero-stripes::before { content: ''; position: absolute; inset: -50%; background: repeating-linear-gradient(-55deg, transparent, transparent 40px, rgba(26,123,196,1) 40px, rgba(26,123,196,1) 42px); }
 .hero-logo-wrap { position: relative; margin-bottom: 42px; display: flex; align-items: center; justify-content: center; }
-.ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); border-radius: 50%; border: 1px solid rgba(26,123,196,.2); animation: pulseRing 4s ease-in-out infinite; }
-.ring:nth-child(1) { width: 280px; height: 280px; }
-.ring:nth-child(2) { width: 340px; height: 340px; border-color: rgba(26,123,196,.10); animation-delay: 1s; }
-@keyframes pulseRing { 0%,100% { opacity:.4; transform: translate(-50%,-50%) scale(1); } 50% { opacity:1; transform: translate(-50%,-50%) scale(1.05); } }
+.hero-diamond-bg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px; height: 360px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent, transparent 18px,
+      rgba(26,123,196,.07) 18px, rgba(26,123,196,.07) 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 18px,
+      rgba(26,123,196,.07) 18px, rgba(26,123,196,.07) 20px
+    );
+  mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, black 40%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, black 40%, transparent 75%);
+  animation: diamondPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes diamondPulse {
+  0%,100% { opacity: .5; transform: translate(-50%,-50%) scale(1);    }
+  50%      { opacity: 1;  transform: translate(-50%,-50%) scale(1.06); }
+}
 .hero-shield { position: relative; z-index: 1; width: 120px; height: auto; animation: float 7s ease-in-out infinite; filter: drop-shadow(0 0 40px rgba(61,165,240,.35)); }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--blue-light); }
@@ -608,7 +630,7 @@ body.lang-es p[data-lang="es"], body.lang-en p[data-lang="en"], body.lang-fr p[d
   <div class="hero-bg"></div>
   <div class="hero-stripes"></div>
   <div class="hero-logo-wrap fi">
-    <div class="ring"></div><div class="ring"></div>
+   <div class="hero-diamond-bg"></div>
     <img class="hero-shield" src="https://res.cloudinary.com/dy9zeeo5g/image/upload/v1775604422/iwllnjzmhawm8x8fwa4w.png" alt="Escudo Pura Malta" onerror="this.style.display='none'">
   </div>
   <div class="hero-eyebrow fi" style="transition-delay:.12s">
