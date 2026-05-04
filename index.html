@@ -434,11 +434,32 @@ nav {
 }
 
 /* FOOTER */
-footer { padding: 48px; border-top: 1px solid var(--mid2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; background: var(--black); margin-top: 80px; }
-.foot-brand { display: flex; align-items: center; gap: 16px; }
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--mid2);
+  display: flex;
+  flex-direction: column;       /* 👈 clave */
+  align-items: center;          /* 👈 centra horizontal */
+  justify-content: center;
+  text-align: center;           /* 👈 centra texto */
+  gap: 12px;
+  background: var(--black);
+  margin-top: 80px;
+}
+.foot-brand {
+  display: flex;
+  flex-direction: column;  /* 👈 logo arriba, texto abajo */
+  align-items: center;
+  gap: 8px;
+}
 .foot-logo { height: 52px; }
 .foot-brand-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: 6px; color: var(--blue-light); text-transform: uppercase; }
-.foot-right { font-size: 13px; color: var(--text-muted); line-height: 1.9; text-align: right; }
+.foot-right {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  text-align: center; /* 👈 */
+}
 .foot-ig { color: var(--blue-light); text-decoration: none; }
 .foot-ig:hover { text-decoration: underline; }
 
